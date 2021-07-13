@@ -1,8 +1,84 @@
 use std::mem;
 
-// pattern_matching -
-fn pattern_matching() {
+// generics -
+struct GenericPoint<T> {
+    x: T,
+    y: T
+}
 
+struct GenericPointTwo<T,V> {
+    x: T,
+    y: V
+}
+
+struct GenericLine<T> {
+    start: GenericPoint<T>,
+    end: GenericPoint<T>
+}
+
+fn generics() {
+    println!("*** GENERICS ***");
+
+    let gp1:GenericPoint<f64> = GenericPoint{ x: 1.2, y: 2.6 };
+    let gp11:GenericPoint<f64> = GenericPoint{ x: 0.2, y: 3.6 };
+    let gp2:GenericPoint<i32> = GenericPoint{ x: 1, y: 2 };
+    let gp3:GenericPointTwo<f64,u16> = GenericPointTwo{ x: 1.2, y: 0 };
+    let gp4:GenericPointTwo<i32,f64> = GenericPointTwo{ x: 1, y: 2.23 };
+
+    let line = GenericLine{ start: gp1, end: gp11 };
+}
+
+// pattern_matching -
+fn how_many(x:i32) -> &'static str {
+    return match x {
+        0 => "no",
+        1 | 2 => "one or two",
+        9..=11 => "lots of",
+        12 => "a dozen",
+        _ if x % 2 == 0 => "some",
+        _ => "a few"
+    }
+}
+
+fn where_coordinates(point:(u8,u8)) -> String {
+    return match point {
+        (0,0) => "origin".to_string(),
+        (0,y) => format!("x axis with y = {}", y),
+        (x,0) => format!("x = {} on the y axis", x),
+        // (ref mut x,0) => format!("x = {} on the y axis", x), // allows to modify by reference x
+        (x,y) => format!("({}, {})", x, y)
+    }
+}
+
+fn color_description_with_pattern_matching(color: Color) {
+    match color {
+        Color::Red                                                        => println!("r"),
+        Color::Blue                                                       => println!("g"),
+        Color::Green                                                      => println!("b"),
+        Color::RgbColor(0, 0, 0)
+            | Color::Cmyk{ black: 255, .. }    => println!("black!"),
+        Color::RgbColor(r, g, b)                                          => println!("rgb({}, {}, {})", r, g, b),
+        _                                                                 => println!("Unkown color")
+    }
+}
+
+fn pattern_matching() {
+    println!("*** PATTERN MATCHING ***");
+
+    for x in 0..13 {
+        println!("{}: I have {} oranges", x, how_many(x));
+    }
+
+    let point = (0, 0);
+    println!("the point is located on {}", where_coordinates(point));
+
+    let point2 = (0, 4);
+    println!("the second point is located on {}", where_coordinates(point2));
+
+    let c_rgb:Color = Color::RgbColor(0, 134, 168);
+    let c_cmyk = Color::Cmyk{ cyan: 0, magenta: 128, yellow: 92, black: 255 };
+    color_description(c_rgb);
+    color_description(c_cmyk); 
 }
 
 // tupples -
@@ -11,6 +87,8 @@ fn sum_and_product(x:i32, y:i32) -> (i32, i32) {
 }
 
 fn tupples() {
+    println!("*** TUPPLES ***");
+
     let x = 3;
     let y = 4;
 
@@ -274,13 +352,14 @@ fn structures() {
 fn main() {
     println!("--- DATA STRUCTURES ---");
 
-    // structures();
-    // enumerations();
-    // option();
-    // arrays();
-    // vectors();
-    // slices();
-    // strings();
-    // tupples();
+    structures();
+    enumerations();
+    option();
+    arrays();
+    vectors();
+    slices();
+    strings();
+    tupples();
     pattern_matching();
+    generics();
 }
