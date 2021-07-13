@@ -77,7 +77,7 @@ fn match_statement() {
         33       => "France",
         46       => "Sweden",
         7        => "Russia",
-        1...999  => "unkown",   // includes 999
+        1..=999  => "unkown",   // includes 999
         _        => "invalid"
     };
 
@@ -87,8 +87,8 @@ fn match_statement() {
 fn main() {
     println!("--- CONTROL FLOW ---");
 
-    // if_statement();
-    // while_and_loop();
-    // for_loop();
+    if_statement();
+    while_and_loop();
+    for_loop();
     match_statement();
 }
