@@ -1,5 +1,106 @@
 use std::mem;
 
+// pattern_matching -
+fn pattern_matching() {
+
+}
+
+// tupples -
+fn sum_and_product(x:i32, y:i32) -> (i32, i32) {
+    return (x + y, x * y);
+}
+
+fn tupples() {
+    let x = 3;
+    let y = 4;
+
+    let tupple = sum_and_product(x, y);
+
+    println!("tupple = {:?}", tupple);
+    println!("({0} + {1} = {2}, {0} * {1} = {3})", x, y, tupple.0, tupple.1);
+
+    // destructuring
+    let (a,b) = tupple;
+    println!("a = {}, b = {}", a, b);
+
+    let tupple2 = sum_and_product(7, 4);
+    let combined_tupple = (tupple, tupple2);
+    println!("combined_tupple = {:?}", combined_tupple);
+    println!("last element of combined_tupple is {}", combined_tupple.1.1);
+
+    let ((c,d), (e,f)) = combined_tupple;
+    println!("c = {}, d = {}, e = {}, f = {}", c, d, e, f);
+
+    // multiple typesn and elements
+    let foo = (true, 42.0, -1i8);
+    println!("foo = {:?}", foo);
+
+    // only one element
+    let meaning = (42,);
+    println!("meaning = {:?}", meaning);
+}
+
+// strings -
+fn strings() {
+    println!("*** STRINGS ***");
+
+    // static means that it will be referenced in our program
+    // reassignation doesn't work
+    // utf-8
+    let s:&'static str = "99 problems";     //&str = string slice
+
+    for c in s.chars().rev() {
+        println!("{}", c);
+    }
+
+    if let Some(c) = s.chars().nth(0) {
+        println!("First character is \'{}\'!", c);
+    }
+    
+    // heap - string
+    let mut letters = String::new();
+    let mut a = 'a' as u8;
+    while a <= ('z' as u8) {
+        letters.push(a as char);
+        if (a as char) != ('z') {
+            // letters.push(',');
+            letters.push_str(", ");
+        }
+        a += 1;
+    }
+    println!("letters = ({}) with size of {} bytes located at {:p}", letters, mem::size_of_val(&letters), &letters);
+
+    // &str <> String
+    let u:&str = &letters;
+    println!("u = ({}) with size of {} bytes located at {:p}", u, mem::size_of_val(&u), &u);
+
+    // concatenation
+    // String + str
+    let v = letters + "abc";
+    let mut w = String::from("armed and dangerous");
+    let mut x = "aicyp666".to_string();
+    println!("{}", x);
+    println!("taking the evil and making it good... {}", x.replace("666", "999"));
+}
+
+// slices - 
+fn use_slice(slice:&mut[i32]) {
+    println!("first element = {} and length of slice is {}", slice[0], slice.len());
+    slice[0] = 999;
+}
+
+fn slices() {
+    println!("*** SLICES ***");
+
+    let mut data = [1, 2, 3, 4, 5];
+
+    println!("data = {:?}", data);
+    use_slice(&mut data[1..4]);
+    println!("data = {:?}", data);
+    use_slice(&mut data);
+    println!("data = {:?}", data);
+}
+
 // vectors -
 fn vectors() {
     println!("*** VECTORS ***");
@@ -173,9 +274,13 @@ fn structures() {
 fn main() {
     println!("--- DATA STRUCTURES ---");
 
-    structures();
-    enumerations();
-    option();
-    arrays();
-    vectors();
+    // structures();
+    // enumerations();
+    // option();
+    // arrays();
+    // vectors();
+    // slices();
+    // strings();
+    // tupples();
+    pattern_matching();
 }
