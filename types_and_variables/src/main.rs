@@ -164,7 +164,7 @@ fn stack_and_heap() {
 }
 
 fn main() {
-    println!("Hello, world!");
+    println!("--- TYPES AND VARIABLES ---");
     
     fundamental_datatypes();
     operators();
