@@ -1,5 +1,53 @@
 use std::mem;
 
+// vectors -
+fn vectors() {
+    println!("*** VECTORS ***");
+
+    let mut veca = Vec::new();
+    veca.push(1);
+    veca.push(2);
+    veca.push(3);
+    println!("veca : {:?}, length : {}", veca, veca.len());
+
+    veca.push(4);
+    println!("veca : {:?}, length : {}, and its first value is veca[0] = {}", veca, veca.len(), veca[0]);
+
+    let i:usize = 3;
+    veca[i] = 333;
+    println!("veca[{}] = {}", i, veca[i]);
+    
+    // option
+    match veca.get(7) {
+        Some(x) => println!("veca[7] = {}", x),
+        None => println!("error, no such element !")
+    }
+
+    veca.push(34);
+    veca.push(777);
+    for x in &veca {
+        println!("{}", x);
+    }
+    println!("veca = {:?}", veca);
+
+    // what's poppin
+    let last_elem = veca.pop();
+    println!("{:?}", last_elem);
+    match last_elem {
+        Some(x) => println!("the last element value is {} and it has been removed from veca", x),
+        None => println!("error, no element was popped...")
+    }
+    println!("veca = {:?}", veca);
+
+    let mut popopop = String::from("i");
+    // while and vectors
+    while let Some(x) = veca.pop() {
+        println!("what's popp{}n ?? {}", popopop, x);
+        popopop.push('i');
+    }
+    println!("veca = {:?}", veca);
+}
+
 // arrays
 fn arrays() {
     println!("*** ARRAYS ***");
@@ -91,11 +139,11 @@ fn color_description(color: Color) {
 fn enumerations() {
     println!("*** ENUMERATIONS ***");
 
-    let cRgb:Color = Color::RgbColor(0, 134, 168);
-    let cCmyk = Color::Cmyk{ cyan: 0, magenta: 128, yellow: 92, black: 255 };
+    let c_rgb:Color = Color::RgbColor(0, 134, 168);
+    let c_cmyk = Color::Cmyk{ cyan: 0, magenta: 128, yellow: 92, black: 255 };
 
-    color_description(cRgb);
-    color_description(cCmyk);   
+    color_description(c_rgb);
+    color_description(c_cmyk);   
 }
 
 // structures - 
@@ -125,8 +173,9 @@ fn structures() {
 fn main() {
     println!("--- DATA STRUCTURES ---");
 
-    // structures();
-    // enumerations();
-    // option();
+    structures();
+    enumerations();
+    option();
     arrays();
+    vectors();
 }
