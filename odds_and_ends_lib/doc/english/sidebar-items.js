@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["bye",""],["hello","Applies to code that follows it In this cas it’s our `hello()` function. Markdown is handled by the documentation comments. -> (not ignored by the compiler)"]]});
