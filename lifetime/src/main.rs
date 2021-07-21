@@ -9,11 +9,27 @@ fn borrowing() {
             println!("x[{}] = {}", j, i);
             j += 1;
         }
+        // x.push(123)     // can't work bc x is immutable reference
         println!("{:?}", x);
     };
 
     let v = vec![3, 2, 1];
     print_vector(&v);
+    for i in 0..=2 {
+        println!("v[{}] = {}", i, v[i]);
+    }
+    println!("{:?}", v);
+
+    let mut a = 40;
+    println!("a = {}", a);
+    let b = &mut a;
+    *b += 2;        // accessing the reference's values
+    println!("(after mutable ref change) -> a = {}", a);
+
+    let mut z = vec![9, 8, 7];
+    for i in &z {
+        println!("i = {}", i);
+    }
 }
 
 // ownership -
